@@ -1,0 +1,77 @@
+# Node modules (if using Node.js scripts)
+node_modules/
+
+# Python virtual environment
+venv/
+__pycache__/
+*.pyc
+
+# Compiled source
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+
+# Packages
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# Logs and databases
+*.log
+*.sql
+*.sqlite
+*.sqlite3
+*.db
+
+# Azure CLI configuration and cache
+.azure/
+
+# AWS CLI configuration and cache
+.aws/
+*.pem
+*.key
+
+# GCP CLI configuration and cache
+.gcloud/
+*.json
+
+# Terraform and CloudFormation files
+*.tfstate
+*.tfstate.*
+.terraform/
+terraform.tfvars
+
+# Ansible
+*.retry
+
+# Docker files
+*.env
+docker-compose.override.yml
+
+# Secrets and sensitive information
+.env
+.secrets
+*.key
+*.crt
+*.pem
+
+# Miscellaneous
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*~
+
+# Ignore the compiled scripts directory if you create binaries
+bin/
+out/
+dist/
