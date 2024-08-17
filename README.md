@@ -62,9 +62,9 @@ To get started with the scripts in this repository:
    \`\`\`
 
 2. **Run the Initial Setup Scripts:**
-   - Navigate to the appropriate directory (e.g., `scripts/azure/infrastructure/`) and run the setup script for your cloud provider:
+   - Navigate to the appropriate directory (e.g., `scripts/{azure|aws|gcp}/infrastructure/`) and run the setup script for your cloud provider:
      \`\`\`bash
-     ./login-setup.sh
+     ./{az|aws|gcp}-login-setup.sh
      \`\`\`
 
 3. **Explore the Scripts:**
