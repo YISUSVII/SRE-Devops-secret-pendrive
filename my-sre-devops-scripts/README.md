@@ -57,7 +57,7 @@ To get started with the scripts in this repository:
 
 1. **Clone the Repository:**
    \`\`\`bash
-   git clone https://github.com/your-username/my-sre-devops-scripts.git
+   git clone https://github.com/YISUSVII/SRE-Devops-secret-pendrive.git
    cd my-sre-devops-scripts
    \`\`\`
 
