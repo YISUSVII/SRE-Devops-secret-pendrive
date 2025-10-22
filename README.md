@@ -24,51 +24,232 @@ This repository serves as a comprehensive toolkit for Site Reliability Engineers
 
 ### Cloud-Specific Scripts
 
-#### Azure
-- **Infrastructure Management**: Scripts to create and manage Azure resources such as Virtual Networks, Subnets, Resource Groups, and more.
-- **Monitoring**: Tools for setting up and configuring Azure Monitor, Application Insights, and other monitoring services.
-- **Security**: Scripts to audit and manage Azure Key Vaults, configure firewalls, and enforce security best practices.
+#### Azure (8 scripts)
+**Infrastructure Management:**
+- `create-vnet.sh` - Create Virtual Networks with subnets
+- `create-vm.sh` - Launch Virtual Machines with SSH key authentication
+- `manage-resource-group.sh` - Create, delete, list, and manage resource groups
 
-#### GCP
-- **Infrastructure Management**: Scripts to create and manage Google Cloud resources like VPCs, Subnets, and Compute Engine instances.
-- **Monitoring**: Tools for setting up Stackdriver, monitoring resource usage, and configuring alerts.
-- **Security**: Scripts to manage IAM policies, configure firewalls, and ensure GCP environment security.
+**Monitoring:**
+- `setup-azure-monitor.sh` - Setup Log Analytics workspace and action groups
+- `create-metric-alert.sh` - Create metric-based alerts for resources (CPU, memory, etc.)
 
-#### AWS
-- **Infrastructure Management**: Scripts to manage AWS resources including VPCs, Subnets, EC2 instances, and more.
-- **Monitoring**: Tools for configuring CloudWatch metrics, alarms, and logging.
-- **Security**: Scripts to audit IAM roles, enforce security groups, and automate compliance checks.
+**Security:**
+- `manage-keyvault.sh` - Comprehensive Key Vault management (create, secrets, keys)
+- `security-audit.sh` - Audit VMs, NSGs, storage accounts, Key Vaults, and role assignments
 
-### Common Scripts
-- **Backup Management**: Cross-cloud scripts for automating database and resource backups.
-- **CI/CD Pipelines**: Scripts to set up continuous integration and deployment pipelines across different cloud providers.
-- **Container Management**: Tools to deploy and manage Docker containers, orchestrate Kubernetes clusters, and more.
+#### GCP (8 scripts)
+**Infrastructure Management:**
+- `create-vpc.sh` - Create VPC networks with custom subnets and firewall rules
+- `create-instance.sh` - Launch Compute Engine instances with startup scripts
+
+**Monitoring:**
+- `setup-monitoring.sh` - Setup Cloud Monitoring and notification channels
+- `create-alert-policy.sh` - Create alert policies for monitoring metrics
+
+**Security:**
+- `iam-audit.sh` - Audit IAM policies, service accounts, and permissions
+- `manage-firewall.sh` - Create, delete, list, and audit firewall rules
+
+#### AWS (7 scripts)
+**Infrastructure Management:**
+- `create-vpc.sh` - Create VPCs with subnets, Internet Gateway, and route tables
+- `launch-ec2.sh` - Launch EC2 instances with security groups
+
+**Monitoring:**
+- `setup-cloudwatch.sh` - Setup SNS topics for alerts
+- `create-cloudwatch-alarm.sh` - Create CloudWatch alarms for metrics
+
+**Security:**
+- `iam-audit.sh` - Comprehensive IAM security audit (users, keys, MFA, policies)
+- `manage-security-groups.sh` - Create, delete, list, and audit security groups
+
+### Common Scripts (9 scripts)
+
+**Backup Management:**
+- `database-backup.sh` - Automated MySQL/PostgreSQL backups to AWS S3, Azure Blob, GCS, or local
+- `volume-snapshot.sh` - Create volume snapshots across AWS, Azure, and GCP
+
+**CI/CD Pipelines:**
+- `setup-github-actions.sh` - Generate GitHub Actions workflow with test, build, and deploy stages
+- `setup-gitlab-ci.sh` - Generate GitLab CI pipeline with staging and production deployment
+
+**Container Management:**
+- `docker-health-check.sh` - Monitor Docker container health, resource usage, and logs
+- `k8s-cluster-health.sh` - Comprehensive Kubernetes cluster health check
+- `deploy-to-k8s.sh` - Deploy applications to Kubernetes with best practices
+
+**Total: 29 production-ready scripts** ✨
 
 ### Initial Setup Scripts
-- **Azure Initial Setup**: A script to install the Azure CLI, log in, and configure your subscription.
-- **GCP Initial Setup**: A script to install the GCP CLI, log in, and set the default project.
-- **AWS Initial Setup**: A script to install the AWS CLI, configure credentials, and set the default region.
+All scripts include initial setup capabilities:
+- **Azure**: `az-login-setup.sh` - Installs Azure CLI, authenticates, and configures subscription
+- **GCP**: `gcp-login-setup.sh` - Installs latest gcloud CLI and configures project (updated to latest version)
+- **AWS**: `aws-login-setup.sh` - Installs AWS CLI v2 and configures credentials
 
 These setup scripts ensure that you have the necessary CLI tools installed and configured to interact with your cloud environments.
 
 ## Getting Started
 
-To get started with the scripts in this repository:
+### Quick Start
 
 1. **Clone the Repository:**
-   \`\`\`bash
+   ```bash
    git clone https://github.com/YISUSVII/SRE-Devops-secret-pendrive.git
-   cd my-sre-devops-scripts
-   \`\`\`
+   cd SRE-Devops-secret-pendrive/my-sre-devops-scripts
+   ```
 
-2. **Run the Initial Setup Scripts:**
-   - Navigate to the appropriate directory (e.g., `scripts/{azure|aws|gcp}/infrastructure/`) and run the setup script for your cloud provider:
-     \`\`\`bash
-     ./{az|aws|gcp}-login-setup.sh
-     \`\`\`
+2. **Install Cloud CLI Tools:**
+   ```bash
+   # For Azure
+   ./scripts/azure/infrastructure/az-login-setup.sh
+   
+   # For AWS
+   ./scripts/aws/infrastructure/aws-login-setup.sh
+   
+   # For GCP
+   ./scripts/gcp/infrastructure/gcp-login-setup.sh
+   ```
 
-3. **Explore the Scripts:**
-   - Browse through the directories for your cloud provider or common scripts and utilize them as needed.
+3. **Configure Environment Variables:**
+   
+   **Azure:**
+   ```bash
+   export AZURE_SUBSCRIPTION_ID="your-subscription-id"
+   export AZURE_RESOURCE_GROUP="my-rg"
+   export AZURE_LOCATION="eastus"
+   ```
+   
+   **AWS:**
+   ```bash
+   export AWS_REGION="us-east-1"
+   # Configure credentials: aws configure
+   ```
+   
+   **GCP:**
+   ```bash
+   export GCP_PROJECT_ID="your-project-id"
+   export GCP_ZONE="us-central1-a"
+   ```
+
+4. **Run Scripts:**
+   ```bash
+   # Example: Create Azure infrastructure
+   cd scripts/azure/infrastructure
+   ./create-vnet.sh
+   ./create-vm.sh
+   
+   # Example: Setup monitoring
+   cd ../monitoring
+   export ALERT_EMAIL="alerts@example.com"
+   ./setup-azure-monitor.sh
+   ```
+
+5. **Review Documentation:**
+   - See [docs/azure-guide.md](my-sre-devops-scripts/docs/azure-guide.md) for Azure
+   - See [docs/aws-guide.md](my-sre-devops-scripts/docs/aws-guide.md) for AWS
+   - See [docs/gcp-guide.md](my-sre-devops-scripts/docs/gcp-guide.md) for GCP
+   - See [docs/common-tasks.md](my-sre-devops-scripts/docs/common-tasks.md) for cross-cloud tools
+
+### Example Workflows
+
+**Create Complete AWS Infrastructure:**
+```bash
+cd scripts/aws/infrastructure
+./create-vpc.sh
+export SUBNET_ID="subnet-xxxxx"  # from output
+export KEY_NAME="my-key"
+./launch-ec2.sh
+```
+
+**Setup Monitoring with Alerts:**
+```bash
+cd scripts/azure/monitoring
+./setup-azure-monitor.sh
+export RESOURCE_ID="/subscriptions/.../virtualMachines/my-vm"
+./create-metric-alert.sh
+```
+
+**Backup Database to Cloud:**
+```bash
+cd scripts/common/backup
+export DB_TYPE="mysql"
+export DB_NAME="myapp"
+export DB_PASSWORD="password"
+export CLOUD_PROVIDER="aws"
+export S3_BUCKET="my-backups"
+./database-backup.sh
+```
+
+**Deploy to Kubernetes:**
+```bash
+cd scripts/common/containers
+export APP_NAME="myapp"
+export IMAGE="myregistry/myapp:latest"
+export NAMESPACE="production"
+./deploy-to-k8s.sh
+```
+
+## Repository Structure
+
+```
+my-sre-devops-scripts/
+├── docs/                          # Comprehensive guides
+│   ├── azure-guide.md            # Azure-specific documentation
+│   ├── aws-guide.md              # AWS-specific documentation
+│   ├── gcp-guide.md              # GCP-specific documentation
+│   └── common-tasks.md           # Cross-cloud tools guide
+│
+├── scripts/
+│   ├── README.md                 # Scripts overview and quick reference
+│   │
+│   ├── azure/                    # Azure scripts (8 total)
+│   │   ├── infrastructure/       # VNet, VMs, resource groups
+│   │   ├── monitoring/           # Azure Monitor, alerts
+│   │   └── security/             # Key Vault, security audit
+│   │
+│   ├── aws/                      # AWS scripts (7 total)
+│   │   ├── infrastructure/       # VPC, EC2, networking
+│   │   ├── monitoring/           # CloudWatch, alarms
+│   │   └── security/             # IAM audit, security groups
+│   │
+│   ├── gcp/                      # GCP scripts (8 total)
+│   │   ├── infrastructure/       # VPC, Compute Engine
+│   │   ├── monitoring/           # Cloud Monitoring, alerts
+│   │   └── security/             # IAM audit, firewall rules
+│   │
+│   └── common/                   # Cross-cloud scripts (9 total)
+│       ├── backup/               # Database & volume backups
+│       ├── cicd/                 # GitHub Actions, GitLab CI
+│       └── containers/           # Docker, Kubernetes tools
+```
+
+## Best Practices
+
+When using these scripts, follow these SRE best practices:
+
+1. **Test First**: Always test scripts in a non-production environment
+2. **Version Control**: Track infrastructure changes with git
+3. **Environment Variables**: Use environment variables for configuration
+4. **Documentation**: Document any customizations or modifications
+5. **Security**: Never commit secrets; use cloud provider secret management
+6. **Monitoring**: Set up alerts for critical resources
+7. **Backups**: Implement regular backup schedules
+8. **Tagging**: Use consistent resource tagging for cost tracking
+9. **Least Privilege**: Follow the principle of least privilege for IAM
+10. **Review Logs**: Regularly review script output and cloud logs
+
+## Prerequisites
+
+- **Operating System**: Linux, macOS, or WSL on Windows
+- **Shell**: Bash 4.0 or higher
+- **Permissions**: Appropriate cloud provider permissions
+- **Tools**: 
+  - Azure CLI (installed by setup script)
+  - AWS CLI v2 (installed by setup script)
+  - GCP gcloud CLI (installed by setup script)
+  - Docker (for container scripts)
+  - kubectl (for Kubernetes scripts)
 
 ## Contributing
 
