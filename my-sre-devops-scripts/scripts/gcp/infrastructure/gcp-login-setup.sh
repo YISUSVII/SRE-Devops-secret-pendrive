@@ -6,10 +6,11 @@ install_gcp_cli() {
   
   # Detect OS and install accordingly
   if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-    # Install for Linux
-    curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-443.0.0-linux-x86_64.tar.gz
-    tar -xf google-cloud-cli-443.0.0-linux-x86_64.tar.gz
-    ./google-cloud-sdk/install.sh
+    # Install for Linux - using latest stable version
+    curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-linux-x86_64.tar.gz
+    tar -xf google-cloud-cli-linux-x86_64.tar.gz
+    ./google-cloud-sdk/install.sh --quiet
+    source ~/google-cloud-sdk/path.bash.inc
   elif [[ "$OSTYPE" == "darwin"* ]]; then
     # Install for macOS
     brew install --cask google-cloud-sdk
