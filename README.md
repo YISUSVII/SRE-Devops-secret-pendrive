@@ -1,11 +1,12 @@
 
 # SRE and DevOps Scripts Repository
 
-Welcome to the **SRE and DevOps Scripts** repository! This repository contains a collection of useful scripts and tools designed to streamline operations, automate infrastructure management, and enhance security across Azure, GCP, and AWS cloud environments.
+Welcome to the **SRE and DevOps Scripts** repository! This repository contains a collection of useful scripts and tools designed to streamline operations, automate infrastructure management, and enhance security across Azure, GCP, and AWS cloud environments, plus comprehensive Linux system administration tools.
 
 ## Table of Contents
 - [Introduction](#introduction)
 - [Features](#features)
+  - [🐧 LinuxTools - System Administration Toolkit](#linuxtools---system-administration-toolkit)
   - [Cloud-Specific Scripts](#cloud-specific-scripts)
     - [Azure](#azure)
     - [GCP](#gcp)
@@ -18,9 +19,45 @@ Welcome to the **SRE and DevOps Scripts** repository! This repository contains a
 
 ## Introduction
 
-This repository serves as a comprehensive toolkit for Site Reliability Engineers (SREs) and DevOps professionals working with multiple cloud providers. It includes scripts for managing cloud resources, automating monitoring setups, ensuring security compliance, and more. Whether you're dealing with Azure, GCP, or AWS, you'll find scripts here that help you simplify and automate your cloud operations.
+This repository serves as a comprehensive toolkit for Site Reliability Engineers (SREs) and DevOps professionals working with multiple cloud providers and Linux servers. It includes scripts for managing cloud resources, automating monitoring setups, ensuring security compliance, system administration, and more. Whether you're dealing with Azure, GCP, AWS, or managing Linux servers, you'll find production-ready scripts here that help you simplify and automate your operations.
 
 ## Features
+
+### 🐧 LinuxTools - System Administration Toolkit
+
+A comprehensive collection of **31+ production-ready scripts** for Linux system administration, monitoring, security, and automation.
+
+**Key Features:**
+- 📊 **Monitoring Agents**: Datadog, Prometheus, Netdata, Zabbix, New Relic
+- 🔧 **System Analysis**: Performance checks, hardware info, benchmarking, comprehensive reporting
+- 🛡️ **Security Tools**: SSH hardening, firewall setup (UFW/Firewalld), vulnerability scanning (Lynis, Rkhunter)
+- 🌐 **Network Tools**: Connectivity tests, speed benchmarks, diagnostics
+- 💾 **Backup & Recovery**: Automated rsync/borg backups, MySQL backups, disaster recovery
+- 🐳 **Container Tools**: Docker installation and monitoring, Kubernetes health checks
+- ☁️ **Cloud Integration**: AWS, Azure, GCP monitoring utilities
+- 🗃️ **Database Tools**: MySQL, PostgreSQL, MongoDB management
+- 🤖 **Automation**: System updates, log cleanup, user management
+
+**Supported Distributions:**
+- Ubuntu (18.04, 20.04, 22.04, 24.04)
+- Debian (9, 10, 11, 12)
+- CentOS (7, 8, Stream)
+- RHEL (7, 8, 9)
+- Rocky Linux & AlmaLinux
+
+**Quick Start:**
+```bash
+cd LinuxTools
+sudo ./setup.sh
+```
+
+**Documentation:**
+- [Quick Start Guide](LinuxTools/docs/installation-guides/QUICK_START.md)
+- [Monitoring Setup](LinuxTools/docs/installation-guides/MONITORING_SETUP.md)
+- [Security Hardening](LinuxTools/docs/best-practices/SECURITY_HARDENING.md)
+- [Troubleshooting](LinuxTools/docs/troubleshooting/COMMON_ISSUES.md)
+
+---
 
 ### Cloud-Specific Scripts
 
@@ -153,6 +190,26 @@ These setup scripts ensure that you have the necessary CLI tools installed and c
 
 ### Example Workflows
 
+**LinuxTools - System Administration:**
+```bash
+# Generate comprehensive system report
+cd LinuxTools/system-analysis/scripts
+./system-report.sh
+
+# Harden SSH security
+cd LinuxTools/security-tools/ssh-hardening
+sudo ./harden-ssh.sh
+
+# Setup monitoring with Prometheus
+cd LinuxTools/monitoring-agents/prometheus
+sudo ./setup-node-exporter.sh
+
+# Automated MySQL backup
+cd LinuxTools/backup-recovery/automated-backups
+export MYSQL_PASSWORD="password"
+./mysql-backup.sh
+```
+
 **Create Complete AWS Infrastructure:**
 ```bash
 cd scripts/aws/infrastructure
@@ -193,35 +250,55 @@ export NAMESPACE="production"
 ## Repository Structure
 
 ```
-my-sre-devops-scripts/
-├── docs/                          # Comprehensive guides
-│   ├── azure-guide.md            # Azure-specific documentation
-│   ├── aws-guide.md              # AWS-specific documentation
-│   ├── gcp-guide.md              # GCP-specific documentation
-│   └── common-tasks.md           # Cross-cloud tools guide
+SRE-Devops-secret-pendrive/
 │
-├── scripts/
-│   ├── README.md                 # Scripts overview and quick reference
+├── LinuxTools/                    # 🐧 Linux System Administration Toolkit
+│   ├── monitoring-agents/         # Datadog, Prometheus, Netdata, Zabbix, New Relic
+│   ├── system-analysis/           # Performance checks, reporting, benchmarks
+│   ├── security-tools/            # SSH hardening, firewalls, vulnerability scans
+│   ├── network-tools/             # Connectivity tests, diagnostics, benchmarks
+│   ├── backup-recovery/           # Automated backups, disaster recovery
+│   ├── container-tools/           # Docker, Kubernetes management
+│   ├── cloud-tools/               # Multi-cloud monitoring utilities
+│   ├── database-tools/            # MySQL, PostgreSQL, MongoDB tools
+│   ├── web-server-tools/          # Apache, Nginx optimization
+│   ├── automation-scripts/        # System automation and maintenance
+│   ├── docs/                      # Comprehensive documentation
+│   ├── setup.sh                   # Interactive setup wizard
+│   └── README.md                  # Full LinuxTools documentation
+│
+├── my-sre-devops-scripts/
+│   ├── docs/                      # Comprehensive guides
+│   │   ├── azure-guide.md         # Azure-specific documentation
+│   │   ├── aws-guide.md           # AWS-specific documentation
+│   │   ├── gcp-guide.md           # GCP-specific documentation
+│   │   └── common-tasks.md        # Cross-cloud tools guide
 │   │
-│   ├── azure/                    # Azure scripts (8 total)
-│   │   ├── infrastructure/       # VNet, VMs, resource groups
-│   │   ├── monitoring/           # Azure Monitor, alerts
-│   │   └── security/             # Key Vault, security audit
-│   │
-│   ├── aws/                      # AWS scripts (7 total)
-│   │   ├── infrastructure/       # VPC, EC2, networking
-│   │   ├── monitoring/           # CloudWatch, alarms
-│   │   └── security/             # IAM audit, security groups
-│   │
-│   ├── gcp/                      # GCP scripts (8 total)
-│   │   ├── infrastructure/       # VPC, Compute Engine
-│   │   ├── monitoring/           # Cloud Monitoring, alerts
-│   │   └── security/             # IAM audit, firewall rules
-│   │
-│   └── common/                   # Cross-cloud scripts (9 total)
-│       ├── backup/               # Database & volume backups
-│       ├── cicd/                 # GitHub Actions, GitLab CI
-│       └── containers/           # Docker, Kubernetes tools
+│   ├── scripts/
+│   │   ├── README.md              # Scripts overview and quick reference
+│   │   │
+│   │   ├── azure/                 # Azure scripts (8 total)
+│   │   │   ├── infrastructure/    # VNet, VMs, resource groups
+│   │   │   ├── monitoring/        # Azure Monitor, alerts
+│   │   │   └── security/          # Key Vault, security audit
+│   │   │
+│   │   ├── aws/                   # AWS scripts (7 total)
+│   │   │   ├── infrastructure/    # VPC, EC2, networking
+│   │   │   ├── monitoring/        # CloudWatch, alarms
+│   │   │   └── security/          # IAM audit, security groups
+│   │   │
+│   │   ├── gcp/                   # GCP scripts (8 total)
+│   │   │   ├── infrastructure/    # VPC, Compute Engine
+│   │   │   ├── monitoring/        # Cloud Monitoring, alerts
+│   │   │   └── security/          # IAM audit, firewall rules
+│   │   │
+│   │   └── common/                # Cross-cloud scripts (9 total)
+│   │       ├── backup/            # Database & volume backups
+│   │       ├── cicd/              # GitHub Actions, GitLab CI
+│   │       └── containers/        # Docker, Kubernetes tools
+│
+├── LICENSE
+└── README.md
 ```
 
 ## Best Practices

@@ -1,0 +1,15 @@
+## Datadog PostgreSQL Monitoring Configuration
+
+init_config:
+
+instances:
+  - host: localhost
+    port: 5432
+    username: datadog
+    password: <PASSWORD>
+    dbname: postgres
+    tags:
+      - service:postgresql
+      - env:production
+    relations:
+      - relation_regex: .*
