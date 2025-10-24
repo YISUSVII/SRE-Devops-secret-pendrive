@@ -1,0 +1,23 @@
+## Datadog System Core Configuration
+## This file configures basic system metrics collection
+
+init_config:
+
+instances:
+  - min_collection_interval: 15
+
+logs:
+  - type: file
+    path: /var/log/syslog
+    service: system
+    source: syslog
+    
+  - type: file
+    path: /var/log/auth.log
+    service: system
+    source: auth
+    
+  - type: file
+    path: /var/log/kern.log
+    service: system
+    source: kernel
